@@ -3,7 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Fleet Admin</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            background: white;
+        }
+        #sidebar{
+            width: 300px;
+            padding: 20px;
+            border-left: 1px solid #ccc ;
+            background: white;
+            height: 100vh;
+        }
+        h3{
+            margin-top: 0;
+        }
+        select,input, button{
+            width: 100%;
+            margin-top: 8px;
+            padding: 6px;
+            border: 1px solid grey;
+            background: none;
+        }
+        #main{
+            flex: 1;
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
     <!-- Main Content -->
@@ -34,6 +64,13 @@
         <button onclick="addFleet()">Add Fleet</button>
         <br><br>
         <h3>Filters</h3>
+        <select id="filterCat" onchange="render()">
+            <option value="All">All Availability</option>
+             <option value="Available">Available</option>
+            <option value="Unavailable">Unavailable</option>
+        </select>
+
+        <button onclick="clearFilters()">Clear Filter</button>
 
 
      </div>
@@ -79,6 +116,11 @@
             let filtered = data.filter(v =>{
                 return (catF === "All" || v.cat === catF) && (avF === "All" || v.avail === avF);
 
+            });
+            filtered.forEach((v, i)=>{
+                let card = document.createElement("div");
+                card.className="card";
+                card.innerHTML = 
             });
         }
      </script>
