@@ -33,6 +33,18 @@
             flex: 1;
             padding: 20px;
         }
+        .card{
+            width: 500px;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 15px;
+            display: grid;
+            margin-bottom: 20px;
+        }
+        .card img{
+            width: 150px;
+            margin-left:15px;
+        }
     </style>
 </head>
 <body>
@@ -120,8 +132,41 @@
             filtered.forEach((v, i)=>{
                 let card = document.createElement("div");
                 card.className="card";
-                card.innerHTML = 
+                card.innerHTML = `
+                   <div class="left-section">
+                    <p><b>Reg No:</b> ${v.reg}</p>
+                    <p><b>Category:</b> ${v.cat}</p>
+                    <p><b>Driver:</b> ${v.driver}</p>
+                   <p><b>Status:</b> ${v.avail}</p>
+
+                   <button class = "action-btn" onclick="updateDriver(${i})">Update Driver</button>
+                   <button class = "action-btn" onclick="toggleAvail(${i})">Change Availablity</button>
+                   <button class = "action-btn" onclick="deleteVehicle(${i})">Delete Vehicale</button>
+                 </div>
+                 <img src = "${v.img}">
+                    
+                `;
+                container.appendChild(card);
             });
+        }
+        function updateDriver(i){
+            let name = prompt("Enter new driver name:");
+
+            if(!name || !name.trim()){
+                alret("Driver name cannot be empty");
+                return;
+            }
+            data[i].driver = name.trim();
+            render();
+            function toggleAvail(i){
+                data[i].avail = data[i].avail === "Available" ? "Unavailable" : "Available";
+                render();
+            }
+        }
+        function clearFilters(){
+            document.getElementById("filterCat").value = "All";
+            document.getElementById("filterAvail").value = "All";
+            render();
         }
      </script>
 </body>
